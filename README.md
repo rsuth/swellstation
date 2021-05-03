@@ -2,6 +2,8 @@
 ### An internet connected oceanic conditions display
 Richard Sutherland - CS530 Spring 2021
 
+<img src='device.jpg' width='500px'/>
+
 Swell station utilizes a [Particle Photon](https://docs.particle.io/photon/) internet connected microcontroller to display current oceanic conditions on 2 analog dials.
 
 ## Structure
