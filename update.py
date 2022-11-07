@@ -12,7 +12,7 @@ def get_raw_data(url):
         return 'Cannot Get Data'
 
 def parse_raw_data(raw_data):
-    pattern = r'(?P<year>20\d{2}) (?P<month>\d\d) (?P<day>\d\d) (?P<hour>\d\d) (?P<minute>\d\d)(?:  MM ){3}  (?P<wave_height>\d+.\d) +(?P<dom_period>\d+) +(?P<avg_period>\d+.\d) (?P<degrees>\d{3})(?: +MM){2} +(?P<temp>\d+.\d)'
+    pattern = r'(?:20\d{2})(?:\s{1,3}\S{2}){7}\s+(?P<wave_height>\S+)\s+(?P<dom_period>\S+)\s+\S+\s+(?P<degrees>\d{3})'
     m = re.search(pattern, raw_data)
     
     if m:
@@ -53,7 +53,7 @@ def send_to_station(photon_device_id, photon_access_token, data):
     })
     return r.content
 
-load_dotenv()
+load_dotenv(".env")
 
 # get configuration variables from environment
 device_id = os.getenv('PHOTON_ID')
@@ -65,6 +65,7 @@ buoy_url = f'https://www.ndbc.noaa.gov/data/realtime2/{buoy_id}.txt'
 
 raw_data = get_raw_data(buoy_url)
 parsed_data = parse_raw_data(raw_data)
+print(parsed_data)
 datastring = build_data_string(parsed_data)
 
 
